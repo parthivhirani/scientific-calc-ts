@@ -80,6 +80,7 @@ function memoryRecall() {
     dis.value = memory[memory.length - 1];
 }
 function memoryClear() {
+    memory = [];
     localStorage.removeItem("memory");
     document.querySelector('#mc').disabled = true;
     document.querySelector('#mr').disabled = true;
