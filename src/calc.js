@@ -1,11 +1,10 @@
-"use strict";
-let dis = document.getElementById("result");
-let upper = document.getElementById("subtext");
-let marr = [];
-let op = ['+', '-', '*', '/', '%', '.'];
+var dis = document.getElementById("result");
+var upper = document.getElementById("subtext");
+var marr = [];
+var op = ['+', '-', '*', '/', '%', '.'];
 // ****************************************** DISPLAY INTO SCREEN **********************************
 function display(val) {
-    let oldop = dis.value.slice(-1);
+    var oldop = dis.value.slice(-1);
     if (op.includes(val) && op.includes(oldop)) {
         dis.value = dis.value.slice(0, -1);
         dis.value += val;
@@ -17,7 +16,7 @@ function display(val) {
 // ************************************************************************************************
 // ************************************ FIRST ROW ************************************************
 function textChange() {
-    let btntxt = document.getElementById("btntxt").innerHTML;
+    var btntxt = document.getElementById("btntxt").innerHTML;
     if (btntxt == 'DEG') {
         document.getElementById("btntxt").innerHTML = 'RAD';
         document.getElementById("second").disabled = false;
@@ -33,11 +32,11 @@ function fe() {
     var cb = document.getElementById('btn-check');
     if (cb.checked == true) {
         if (dis.value != '') {
-            const fE = parseFloat(dis.value);
+            var fE = parseFloat(dis.value);
             dis.value = fE.toExponential();
         }
         else {
-            const fE = 0;
+            var fE = 0;
             dis.value = fE.toExponential();
         }
     }
@@ -45,21 +44,11 @@ function fe() {
 // ************************************************************************************************
 // *************************************** MEMORY FUNCTIONS ***************************************
 // localStorage.removeItem("memory");
-let memory = JSON.parse(localStorage.getItem('memory'));
-if (memory != null) {
-    document.querySelector('#mc').disabled = false;
-    document.querySelector('#mr').disabled = false;
-    document.querySelector('#m').disabled = false;
-}
-else {
-    document.querySelector('#mc').disabled = true;
-    document.querySelector('#mr').disabled = true;
-    document.querySelector('#m').disabled = true;
-}
+var memory = JSON.parse(localStorage.getItem('memory'));
 function memoryStore() {
     if (dis.value == '') {
         if (memory == null) {
-            let data1 = [];
+            var data1 = [];
             data1.push(0);
             localStorage.setItem("memory", JSON.stringify(data1));
         }
@@ -72,32 +61,38 @@ function memoryStore() {
         memory.push(parseFloat(dis.value));
         localStorage.setItem("memory", JSON.stringify(memory));
     }
+    if (marr[marr.length - 1] != parseFloat(dis.value)) {
+        marr.push(parseFloat(dis.value));
+    }
     document.querySelector('#mc').disabled = false;
     document.querySelector('#mr').disabled = false;
     document.querySelector('#m').disabled = false;
+    console.log(marr);
 }
 function memoryRecall() {
-    dis.value = memory[memory.length - 1];
+    dis.value = marr[marr.length - 1].toString();
+    console.log(marr);
 }
 function memoryClear() {
-    localStorage.removeItem("memory");
+    marr.splice(0, marr.length);
     document.querySelector('#mc').disabled = true;
     document.querySelector('#mr').disabled = true;
     document.querySelector('#m').disabled = true;
+    console.log(marr);
 }
 function memoryPlus() {
-    memory[memory.length - 1] += parseFloat(dis.value);
-    localStorage.setItem("memory", JSON.stringify(memory));
+    marr[marr.length - 1] += parseFloat(dis.value);
+    console.log(marr);
 }
 function memoryminus() {
-    memory[memory.length - 1] -= parseFloat(dis.value);
-    localStorage.setItem("memory", JSON.stringify(memory));
+    marr[marr.length - 1] -= parseFloat(dis.value);
+    console.log(marr);
 }
 function memoryShow() {
-    let html = "<table>";
-    for (var i = memory.length - 1; i >= 0; i--) {
+    var html = "<table>";
+    for (var i = marr.length - 1; i >= 0; i--) {
         html += "<tr>";
-        html += "<td>" + memory[i] + "</td>";
+        html += "<td>" + marr[i] + "</td>";
         html += "</tr>";
     }
     html += "</table>";
@@ -113,8 +108,8 @@ document.getElementById("second1").addEventListener("click", function (e) {
 });
 // INSIDE TRIGONOMETRY
 function sin() {
-    let mode = document.getElementById("btntxt").innerHTML;
-    let sinval = document.getElementById('sin').innerHTML;
+    var mode = document.getElementById("btntxt").innerHTML;
+    var sinval = document.getElementById('sin').innerHTML;
     if (sinval == 'sin') {
         if (mode == 'RAD') {
             upper.value = 'sinᵣ(' + dis.value + ')';
@@ -138,8 +133,8 @@ function sin() {
     }
 }
 function cos() {
-    let mode = document.getElementById("btntxt").innerHTML;
-    let sinval = document.getElementById('sin').innerHTML;
+    var mode = document.getElementById("btntxt").innerHTML;
+    var sinval = document.getElementById('sin').innerHTML;
     if (sinval == 'sin') {
         if (mode == 'RAD') {
             upper.value = 'cosᵣ(' + dis.value + ')';
@@ -163,8 +158,8 @@ function cos() {
     }
 }
 function tan() {
-    let mode = document.getElementById("btntxt").innerHTML;
-    let sinval = document.getElementById('sin').innerHTML;
+    var mode = document.getElementById("btntxt").innerHTML;
+    var sinval = document.getElementById('sin').innerHTML;
     if (sinval == 'sin') {
         if (mode == 'RAD') {
             upper.value = 'tanᵣ(' + dis.value + ')';
@@ -188,8 +183,8 @@ function tan() {
     }
 }
 function sec() {
-    let mode = document.getElementById("btntxt").innerHTML;
-    let sinval = document.getElementById('sin').innerHTML;
+    var mode = document.getElementById("btntxt").innerHTML;
+    var sinval = document.getElementById('sin').innerHTML;
     if (sinval == 'sin') {
         if (mode == 'RAD') {
             upper.value = 'secᵣ(' + dis.value + ')';
@@ -210,8 +205,8 @@ function sec() {
     }
 }
 function cosec() {
-    let mode = document.getElementById("btntxt").innerHTML;
-    let sinval = document.getElementById('sin').innerHTML;
+    var mode = document.getElementById("btntxt").innerHTML;
+    var sinval = document.getElementById('sin').innerHTML;
     if (sinval == 'sin') {
         if (mode == 'RAD') {
             upper.value = 'cscᵣ(' + dis.value + ')';
@@ -232,8 +227,8 @@ function cosec() {
     }
 }
 function cot() {
-    let mode = document.getElementById("btntxt").innerHTML;
-    let sinval = document.getElementById('sin').innerHTML;
+    var mode = document.getElementById("btntxt").innerHTML;
+    var sinval = document.getElementById('sin').innerHTML;
     if (sinval == 'sin') {
         if (mode == 'RAD') {
             upper.value = 'cotᵣ(' + dis.value + ')';
@@ -272,15 +267,15 @@ function rand() {
 }
 function dms() {
     upper.value = "dms(" + dis.value + ")";
-    let degree = Math.floor(parseFloat(dis.value));
-    let minutes = ((parseFloat(dis.value) - Math.floor(parseFloat(dis.value))) * 60.0);
-    let seconds = (minutes - Math.floor(minutes)) * 60.0;
+    var degree = Math.floor(parseFloat(dis.value));
+    var minutes = ((parseFloat(dis.value) - Math.floor(parseFloat(dis.value))) * 60.0);
+    var seconds = (minutes - Math.floor(minutes)) * 60.0;
     dis.value = degree + "." + Math.floor(minutes) + seconds.toFixed(0);
 }
 // function deg() {}
 // **********************************************************************************************
 // ************************************ INSIDE 2nd **********************************************
-let btnCount = 1;
+var btnCount = 1;
 function changeBtn() {
     if (btnCount % 2 == 0) {
         document.getElementById('sqr').innerHTML = 'x<sup>2</sup>';
@@ -303,7 +298,7 @@ function changeBtn() {
         btnCount++;
     }
 }
-let btnCountI = 1;
+var btnCountI = 1;
 function changeToInverse() {
     if (btnCountI % 2 == 0) {
         document.getElementById('second1').style.backgroundColor = 'white';
@@ -328,7 +323,7 @@ function changeToInverse() {
         btnCountI++;
     }
 }
-let btnCountH = 1;
+var btnCountH = 1;
 function changeToHyp() {
     if (btnCountH % 2 == 0) {
         document.getElementById('second').style.backgroundColor = 'white';
@@ -372,7 +367,7 @@ function pop() {
 // **********************************************************************************************
 // ****************************************** ROW: 2 ********************************************
 function sqr() {
-    let squr = document.getElementById('sqr').innerHTML;
+    var squr = document.getElementById('sqr').innerHTML;
     if (squr == 'x<sup>3</sup>') {
         upper.value = 'cube(' + dis.value + ')';
         dis.value = Math.pow(parseFloat(dis.value), 3).toString();
@@ -388,18 +383,18 @@ function inverse() {
 }
 function expo() {
     if (dis.value != '') {
-        const fE = parseFloat(dis.value);
+        var fE = parseFloat(dis.value);
         dis.value = fE.toExponential();
     }
     else {
-        const fE = 0;
+        var fE = 0;
         dis.value = fE.toExponential();
     }
 }
 // **********************************************************************************************
 // ****************************************** ROW: 3 ********************************************
 function sqroot() {
-    let sqRoot = document.getElementById('root').innerHTML;
+    var sqRoot = document.getElementById('root').innerHTML;
     if (sqRoot == '2√x') {
         upper.value = '√(' + dis.value + ')';
         dis.value = Math.sqrt(parseFloat(dis.value)).toString();
@@ -412,12 +407,12 @@ function sqroot() {
 function factorial() {
     if (parseFloat(dis.value) < 100000000000) {
         upper.value = 'fact(' + dis.value + ')';
-        let fact = 1;
+        var fact = 1;
         if (parseFloat(dis.value) == 0 || parseFloat(dis.value) == 1) {
             fact = 1;
         }
         else {
-            for (let i = 1; i <= parseFloat(dis.value); i++) {
+            for (var i = 1; i <= parseFloat(dis.value); i++) {
                 fact *= i;
             }
         }
@@ -430,7 +425,7 @@ function factorial() {
 // **********************************************************************************************
 // ****************************************** ROW: 4 ********************************************
 function xtoy() {
-    let xToY = document.getElementById('expo').innerHTML;
+    var xToY = document.getElementById('expo').innerHTML;
     if (xToY == 'x<sup>y</sup>') {
         dis.value += '**';
     }
@@ -441,7 +436,7 @@ function xtoy() {
 // **********************************************************************************************
 // ****************************************** ROW: 5 ********************************************
 function tentox() {
-    let tenToX = document.getElementById('tenpow').innerHTML;
+    var tenToX = document.getElementById('tenpow').innerHTML;
     if (tenToX == '10<sup>x</sup>') {
         upper.value = '10^(' + dis.value + ')';
         dis.value = Math.pow(10, parseFloat(dis.value)).toString();
@@ -460,7 +455,7 @@ function log() {
 // **********************************************************************************************
 // ****************************************** ROW: 7 ********************************************
 function ln() {
-    let ln = document.getElementById('ln').innerHTML;
+    var ln = document.getElementById('ln').innerHTML;
     if (ln == 'ln') {
         upper.value = 'ln(' + dis.value + ')';
         dis.value = Math.log(parseFloat(dis.value)).toString();
@@ -482,13 +477,13 @@ function answer() {
     try {
         upper.value = dis.value + '=';
         dis.value = '';
-        let x = upper.value.slice(0, -1);
+        var x = upper.value.slice(0, -1);
         var y = eval(x);
     }
     catch (_a) {
         y = 'Error!';
     }
-    let cb = document.getElementById('btn-check');
+    var cb = document.getElementById('btn-check');
     if (cb.checked == true) {
         dis.value = y.toExponential();
     }

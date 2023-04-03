@@ -47,47 +47,63 @@ function fe() {
 
 
 // *************************************** MEMORY FUNCTIONS ***************************************
-function ms() {
+// localStorage.removeItem("memory");
+let memory = JSON.parse(localStorage.getItem('memory')!);
+if(memory!=null) {
+    (<HTMLInputElement>document.querySelector('#mc')!).disabled = false;
+    (<HTMLInputElement>document.querySelector('#mr')!).disabled = false;
+    (<HTMLInputElement>document.querySelector('#m')!).disabled = false;
+} else {
+    (<HTMLInputElement>document.querySelector('#mc')).disabled = true;
+    (<HTMLInputElement>document.querySelector('#mr')).disabled = true;
+    (<HTMLInputElement>document.querySelector('#m')).disabled = true;
+}
+
+function memoryStore() {
     if(dis.value == '') {
-        marr.push(0);
-    }
-    if(marr[marr.length-1] != parseFloat(dis.value)) {
-        marr.push(parseFloat(dis.value));
+        if(memory==null) {
+            let data1: number[] = [];
+            data1.push(0);
+            localStorage.setItem("memory", JSON.stringify(data1));
+        } else {
+            memory.push(0);
+            localStorage.setItem("memory", JSON.stringify(memory));
+        }
+    } else {
+        memory.push(parseFloat(dis.value));
+        localStorage.setItem("memory", JSON.stringify(memory));
     }
     (<HTMLInputElement>document.querySelector('#mc')!).disabled = false;
     (<HTMLInputElement>document.querySelector('#mr')!).disabled = false;
     (<HTMLInputElement>document.querySelector('#m')!).disabled = false;
-    console.log(marr);
 }
 
-function mr() {
-    dis.value = marr[marr.length-1].toString();
-    console.log(marr);
+function memoryRecall() {
+    dis.value = memory[memory.length-1];
 }
 
-function mc() {
-    marr.splice(0, marr.length);
+function memoryClear() {
+    localStorage.removeItem("memory");
     (<HTMLInputElement>document.querySelector('#mc')).disabled = true;
     (<HTMLInputElement>document.querySelector('#mr')).disabled = true;
     (<HTMLInputElement>document.querySelector('#m')).disabled = true;
-    console.log(marr);
 }
 
-function mplus() {
-    marr[marr.length-1] += parseFloat(dis.value);
-    console.log(marr);
+function memoryPlus() {
+    memory[memory.length-1] += parseFloat(dis.value);
+    localStorage.setItem("memory", JSON.stringify(memory));
 }
 
-function mminus() {
-    marr[marr.length-1] -= parseFloat(dis.value);
-    console.log(marr);
+function memoryminus() {
+    memory[memory.length-1] -= parseFloat(dis.value);
+    localStorage.setItem("memory", JSON.stringify(memory));
 }
 
-function m() {
+function memoryShow() {
     let html = "<table>";
-    for (var i = marr.length-1; i >= 0; i--) {
+    for (var i = memory.length-1; i >= 0; i--) {
         html+="<tr>";
-        html+="<td>"+marr[i]+"</td>";
+        html+="<td>"+memory[i]+"</td>";
         html+="</tr>";
     }
     html+="</table>";
