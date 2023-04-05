@@ -61,6 +61,7 @@ if(memory!=null) {
 }
 
 function memoryStore() {
+    let memory = JSON.parse(localStorage.getItem('memory')!);
 
     if(dis.value == '') {
         if(memory==null) {
@@ -89,6 +90,7 @@ function memoryStore() {
 }
 
 function memoryRecall() {
+    let memory = JSON.parse(localStorage.getItem('memory')!);
     dis.value = memory[memory.length-1];
 }
 
@@ -101,16 +103,22 @@ function memoryClear() {
 }
 
 function memoryPlus() {
+    let memory = JSON.parse(localStorage.getItem('memory')!);
+
     memory[memory.length-1] += parseFloat(dis.value);
     localStorage.setItem("memory", JSON.stringify(memory));
 }
 
 function memoryminus() {
+    let memory = JSON.parse(localStorage.getItem('memory')!);
+
     memory[memory.length-1] -= parseFloat(dis.value);
     localStorage.setItem("memory", JSON.stringify(memory));
 }
 
 function memoryShow() {
+    let memory = JSON.parse(localStorage.getItem('memory')!);
+    
     let html = "<table>";
     for (var i = memory.length-1; i >= 0; i--) {
         html+="<tr>";
