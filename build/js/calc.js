@@ -69,8 +69,15 @@ function memoryStore() {
         }
     }
     else {
-        memory.push(parseFloat(dis.value));
-        localStorage.setItem("memory", JSON.stringify(memory));
+        if (memory != null) {
+            memory.push(parseFloat(dis.value));
+            localStorage.setItem("memory", JSON.stringify(memory));
+        }
+        else {
+            let data1 = [];
+            data1.push(parseFloat(dis.value));
+            localStorage.setItem("memory", JSON.stringify(data1));
+        }
     }
     document.querySelector('#mc').disabled = false;
     document.querySelector('#mr').disabled = false;

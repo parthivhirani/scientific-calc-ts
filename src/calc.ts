@@ -49,6 +49,7 @@ function fe() {
 // *************************************** MEMORY FUNCTIONS ***************************************
 // localStorage.removeItem("memory");
 let memory = JSON.parse(localStorage.getItem('memory')!);
+
 if(memory!=null) {
     (<HTMLInputElement>document.querySelector('#mc')!).disabled = false;
     (<HTMLInputElement>document.querySelector('#mr')!).disabled = false;
@@ -60,18 +61,27 @@ if(memory!=null) {
 }
 
 function memoryStore() {
+
     if(dis.value == '') {
         if(memory==null) {
             let data1: number[] = [];
             data1.push(0);
             localStorage.setItem("memory", JSON.stringify(data1));
         } else {
+            
             memory.push(0);
             localStorage.setItem("memory", JSON.stringify(memory));
         }
     } else {
-        memory.push(parseFloat(dis.value));
-        localStorage.setItem("memory", JSON.stringify(memory));
+        if(memory!=null) {
+            memory.push(parseFloat(dis.value));
+            localStorage.setItem("memory", JSON.stringify(memory));
+        } else {
+            let data1: number[] = [];
+            data1.push(parseFloat(dis.value));
+            localStorage.setItem("memory", JSON.stringify(data1));
+        }
+        
     }
     (<HTMLInputElement>document.querySelector('#mc')!).disabled = false;
     (<HTMLInputElement>document.querySelector('#mr')!).disabled = false;
