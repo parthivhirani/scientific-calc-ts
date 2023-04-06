@@ -57,6 +57,7 @@ else {
     document.querySelector('#m').disabled = true;
 }
 function memoryStore() {
+    let memory = JSON.parse(localStorage.getItem('memory'));
     if (dis.value == '') {
         if (memory == null) {
             let data1 = [];
@@ -84,6 +85,7 @@ function memoryStore() {
     document.querySelector('#m').disabled = false;
 }
 function memoryRecall() {
+    let memory = JSON.parse(localStorage.getItem('memory'));
     dis.value = memory[memory.length - 1];
 }
 function memoryClear() {
@@ -94,14 +96,17 @@ function memoryClear() {
     document.querySelector('#m').disabled = true;
 }
 function memoryPlus() {
+    let memory = JSON.parse(localStorage.getItem('memory'));
     memory[memory.length - 1] += parseFloat(dis.value);
     localStorage.setItem("memory", JSON.stringify(memory));
 }
 function memoryminus() {
+    let memory = JSON.parse(localStorage.getItem('memory'));
     memory[memory.length - 1] -= parseFloat(dis.value);
     localStorage.setItem("memory", JSON.stringify(memory));
 }
 function memoryShow() {
+    let memory = JSON.parse(localStorage.getItem('memory'));
     let html = "<table>";
     for (var i = memory.length - 1; i >= 0; i--) {
         html += "<tr>";
@@ -381,6 +386,7 @@ function pop() {
 // ****************************************** ROW: 2 ********************************************
 function sqr() {
     let squr = document.getElementById('sqr').innerHTML;
+    dis.value = dis.value == '' ? '0' : dis.value;
     if (squr == 'x<sup>3</sup>') {
         upper.value = 'cube(' + dis.value + ')';
         dis.value = Math.pow(parseFloat(dis.value), 3).toString();
@@ -391,6 +397,7 @@ function sqr() {
     }
 }
 function inverse() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     upper.value = '1/(' + dis.value + ')';
     dis.value = (1 / parseFloat(dis.value)).toString();
 }
@@ -407,6 +414,7 @@ function expo() {
 // **********************************************************************************************
 // ****************************************** ROW: 3 ********************************************
 function sqroot() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let sqRoot = document.getElementById('root').innerHTML;
     if (sqRoot == '2√x') {
         upper.value = '√(' + dis.value + ')';
@@ -438,6 +446,7 @@ function factorial() {
 // **********************************************************************************************
 // ****************************************** ROW: 4 ********************************************
 function xtoy() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let xToY = document.getElementById('expo').innerHTML;
     if (xToY == 'x<sup>y</sup>') {
         dis.value += '**';
@@ -449,6 +458,7 @@ function xtoy() {
 // **********************************************************************************************
 // ****************************************** ROW: 5 ********************************************
 function tentox() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let tenToX = document.getElementById('tenpow').innerHTML;
     if (tenToX == '10<sup>x</sup>') {
         upper.value = '10^(' + dis.value + ')';
@@ -462,12 +472,14 @@ function tentox() {
 // **********************************************************************************************
 // ****************************************** ROW: 6 ********************************************
 function log() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     upper.value = 'log(' + dis.value + ')';
     dis.value = Math.log10(parseFloat(dis.value)).toString();
 }
 // **********************************************************************************************
 // ****************************************** ROW: 7 ********************************************
 function ln() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let ln = document.getElementById('ln').innerHTML;
     if (ln == 'ln') {
         upper.value = 'ln(' + dis.value + ')';

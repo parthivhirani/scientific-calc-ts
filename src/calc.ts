@@ -404,16 +404,18 @@ function pop() {
 // ****************************************** ROW: 2 ********************************************
 function sqr() {
     let squr = document.getElementById('sqr')!.innerHTML as HTMLInputElement | string;
-    if(squr == 'x<sup>3</sup>') {
-        upper.value = 'cube('+ dis.value + ')';
-        dis.value = Math.pow(parseFloat(dis.value), 3).toString();
-    } else {
-        upper.value = 'sqr('+ dis.value + ')';
-        dis.value = Math.pow(parseFloat(dis.value), 2).toString();   
-    }
+    dis.value = dis.value == '' ? '0' : dis.value;
+        if(squr == 'x<sup>3</sup>') {
+            upper.value = 'cube('+ dis.value + ')';
+            dis.value = Math.pow(parseFloat(dis.value), 3).toString();
+        } else {
+            upper.value = 'sqr('+ dis.value + ')';
+            dis.value = Math.pow(parseFloat(dis.value), 2).toString();   
+        }
 }
 
 function inverse() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     upper.value = '1/('+ dis.value + ')';
     dis.value = (1 / parseFloat(dis.value)).toString(); 
 }
@@ -432,6 +434,7 @@ function expo() {
 
 // ****************************************** ROW: 3 ********************************************
 function sqroot() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let sqRoot = document.getElementById('root')!.innerHTML as HTMLInputElement | string;
     if(sqRoot == '2√x') {
         upper.value = '√('+ dis.value + ')';
@@ -463,6 +466,7 @@ function factorial() {
 
 // ****************************************** ROW: 4 ********************************************
 function xtoy() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let xToY = document.getElementById('expo')!.innerHTML as HTMLInputElement | string;
     if(xToY == 'x<sup>y</sup>') {
         dis.value += '**';
@@ -475,6 +479,7 @@ function xtoy() {
 
 // ****************************************** ROW: 5 ********************************************
 function tentox() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let tenToX = document.getElementById('tenpow')!.innerHTML as HTMLInputElement | string;
     if(tenToX == '10<sup>x</sup>') {
         upper.value = '10^('+ dis.value + ')';
@@ -489,6 +494,7 @@ function tentox() {
 
 // ****************************************** ROW: 6 ********************************************
 function log() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     upper.value = 'log('+ dis.value + ')';
     dis.value = Math.log10(parseFloat(dis.value)).toString();
 }
@@ -497,6 +503,7 @@ function log() {
 
 // ****************************************** ROW: 7 ********************************************
 function ln() {
+    dis.value = dis.value == '' ? '0' : dis.value;
     let ln = document.getElementById('ln')!.innerHTML as HTMLInputElement | string;
     if(ln == 'ln') {
         upper.value = 'ln('+ dis.value + ')';
